@@ -1,72 +1,13 @@
 CC=cc
 AR=ar
 CFLAGS=-Wall -Wextra -Werror -I$(HEADERS)
-NAME=libprintf.a
-HEADERS=headers/
+PRINTF=libprintf.a
 TEST=test
+HEADERS=headers/
+LIBFT=libft.a
 
-OBJECTS = $(FILES:.c=.o)
-
-OBJECTS_BONUS= $(FILES_BONUS:.c=.o)
-
-LIBFT_OBJECT=$(LIBFT_FILES:.c=.o)
-
-###
-# Defaults --------------------------------------
-###
-
-all: $(NAME)
-	$(TEST)
-
-%.o:%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
-
-$(OBJECTS): $(LIBFT)
-
-$(NAME): $(OBJECTS)
-	$(AR) rcs $@ $^
-
-###
-# Libs and Bonus --------------------------------
-###
-
-$(LIBFT): $(LIBFT_OBJECT)
-	$(AR) rcs $@ $^
-
-bonus: $(OBJECTS) $(OBJECTS_BONUS)
-	$(AR) rcs $@ $^
-
-###
-# TEST ------------------------------------------
-###
-
-$(TEST): $(NAME) $(OBJECTS_TEST)
-	$(CC) $(CFLAGS) -l $(NAME)
-
-$(TEST)_bonus: bonus $(OBJECTS_TEST)
-	$(CC) $(CFLAGS) -l $(NAME)
-
-test.o: test.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-###
-# Utilities -------------------------------------
-###
-
-clean:
-	rm -rf $(OBJECTS)
-
-fclean: clean
-	rm -rf $(NAME) $(TEST)
-
-re: fclean all
-	
-.PHONY:clean fclean re
-
-FILES =	ft_printf.c \
-		convert.c \
-
-FILES_BONUS=
+PRINTF_FILES =	src/ft_printf.c \
+				src/convert.c \
 
 LIBFT_FILES =	ft_isascii.c \
 				ft_memmove.c \
@@ -110,4 +51,53 @@ LIBFT_FILES =	ft_isascii.c \
 				ft_lstdelone.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
-				ft_lstmap.c \
+				ft_lstmap.c 
+
+
+###
+# MAIN TARGET -----------------------------------
+###
+all:$(PRINTF) $(TEST)
+
+$(PRINTF): PRINTF_OBJECTS
+	@echo PRINTF
+	$(AR) rcs $@ $^
+
+PRINTF_OBJECTS: $(LIBFT) $(PRINTF_FILES)
+	@echo PRINTF_OBJECTS
+	$(CC) $(CFLAGS) -v -c $>
+
+###
+# LIBS ------------------------------------------
+###
+
+$(LIBFT): LIBFT_OBJECTS
+	@echo LIBFT
+	$(AR) rcs $@ $^
+
+LIBFT_OBJECTS: $(LIBFT_FILES)
+	@echo Libft OBJECTS
+	$(CC) $(CFLAGS) -v -c $>
+
+###
+# TEST ------------------------------------------
+###
+
+$(TEST): $(PRINTF)
+	@echo test
+	$(CC) $(CFLAGS) test.c -L. -l$(PRINTF) -o $@
+
+###
+# Utilities -------------------------------------
+###
+
+clean:
+	rm -rf $(PRINTF_OBJECTS)
+
+fclean: clean
+	rm -rf $(PRINTF) $(TEST)
+
+re: fclean all
+	
+.PHONY:clean fclean re
+
