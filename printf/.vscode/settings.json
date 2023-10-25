@@ -1,0 +1,19 @@
+{
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": [
+					"comments.makefile"
+				],
+				"settings": {
+					"foreground": "#4af626" // Change the color value to your desired color
+				}
+			}
+		]
+	},
+	"files.associations": {
+		"libft.h": "c"
+	}
+
+}	
+
