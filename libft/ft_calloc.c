@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:08:06 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/25 10:30:57 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/25 11:09:18 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
+	size_t	max;
 
-	if (nmemb == 0 || size == 0)
+	max = 0;
+	if (nmemb == 0 || size == 0 || ((max - 1) / size < nmemb))
 		return (NULL);
 	ptr = malloc(nmemb * size);
 	if (ptr)
