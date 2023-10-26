@@ -3,15 +3,13 @@ AR=ar
 CFLAGS=-Wall -Wextra -Werror -I$(HEADERS)
 HEADERS=headers/
 
-OBJ_DIR= obj
-
 PRINTF=libprintf.a
 LIBFT=libft.a
 TEST=test
 
-EXE= $(TEST)
-LIBS_NAME=$(PRINTF) $(LIBFT)
-LIBS := $(patsubst lib%.a,%, $(LIBS_NAME))
+OBJ_DIR= obj
+LIBS_OBJ_FOLDER_NAME=printf libft 
+LIBS_TARGET_NAME=libprintf.a libft.a
 
 PRINTF_FILES=ft_printf.c \
 			convert.c
@@ -66,13 +64,20 @@ TEST_FILES=test.c
 # OBJECTS ---------------------------------------
 ###
 LIBFT_FILES := $(addprefix libft/,$(LIBFT_FILES))
-LIBFT_OBJECTS := $(patsubst %.c,$(OBJ_DIR)%.o,$(LIBFT_FILES))
+LIBFT_OBJECTS := $(patsubst %.c,%.o,$(LIBFT_FILES))
 
-$(OBJ_DIR):
+PRINTF_FILES := $(addprefix printf/,$(PRINTF_FILES))
+PRINTF_OBJECTS := $(patsubst %.c,%.o,$(PRINTF_FILES))
+
+$(OBJ_DIR): $(LIBS_OBJ_FOLDER_NAME)
 	mkdir -p $@
+	$(foreach lib,$^, mkdir -p $@/$(lib))
 
-# %.o:%.c | $(OBJ_DIR)
-# 	$(CC) $(CFLAGS) -v -c $<
+%.o: %.c | $(OBJ_DIR)
+	$(info Compiling $< to $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+	mv $@ -t$(OBJ_DIR)/$(dir $@)
+
 
 ###
 # MAIN TARGET -----------------------------------
@@ -81,8 +86,9 @@ $(OBJ_DIR):
 all:$(PRINTF) $(TEST)
 
 $(PRINTF):$(LIBFT) $(PRINTF_OBJECTS)
-	@echo PRINTF
-	$(AR) rcs $@ $>
+	$(info Compiling $< to $@)
+	$(AR) rcs $@ obj/$2
+	echo PRINTF
 
 ###
 # LIBS ------------------------------------------
@@ -90,12 +96,13 @@ $(PRINTF):$(LIBFT) $(PRINTF_OBJECTS)
 
 $(LIBFT): $(LIBFT_OBJECTS)
 	$(info Compiling $< to $@)
-	$(AR) rcs $@ $<
+	$(AR) rcs $@ $(OBJ_DIR)/$<
 
 ###
 # TEST ------------------------------------------
 ###
 
+LIBS := $(patsubst lib%.a,%, $(LIBS_TARGET_NAME))
 $(TEST): $(PRINTF) $(TEST_OBJECTS)
 	@echo test
 	$(CC) $(CFLAGS) $(TEST_OBJECTS) -L. $(addprefix -l, $(LIBS)) -o $@
@@ -108,9 +115,9 @@ clean:
 	rm -rf $(OBJ_DIR) 
 
 fclean: clean
-	rm -rf $(EXE) $(LIBS_NAME)
+	rm -rf $(TEST) $(LIBS_TARGET_NAME)
 
 re: fclean all
 	
-.PHONY:clean fclean re
+.PHONY:clean fclean re obj
 
