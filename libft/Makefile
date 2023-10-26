@@ -6,17 +6,14 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/10/26 19:32:50 by aurban           ###   ########.fr        #
+#    Updated: 2023/10/26 20:00:39 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-AR=ar
 CFLAGS=-Wall -Werror -Wextra
 
 LIBFT_TARGET_NAME=libft.a
-
-LIBFT_OBJ_DIR=libft_obj
 
 LIBFT_FILES=ft_isascii.c \
 	ft_memmove.c \
@@ -66,30 +63,19 @@ LIBFT_FILES_BONUSES=ft_lstnew.c \
 LIBFT_OBJECTS = $(patsubst %.c,%.o,$(LIBFT_FILES))
 LIBFT_OBJECTS_BONUSES = $(patsubst %.c,%.o,$(LIBFT_FILES_BONUSES))
 
-$(LIBFT_OBJ_DIR):
-	@echo Created $@
-	@mkdir -p $@
-
-%.o:%.c | $(LIBFT_OBJ_DIR)
-	echo $@
-	$(CC) $(CFLAGS) -c $<
-	mv $@ -t $(addprefix $(LIBFT_OBJ_DIR)/,$@)
-
-all: $(LIBFT_OBJ_DIR) $(LIBFT_TARGET_NAME)
+all:$(LIBFT_TARGET_NAME)
 
 $(LIBFT_TARGET_NAME): $(LIBFT_OBJECTS)
-	@echo Packing default files into Archive
-	$(AR) rcs $@ $(addprefix $(LIBFT_OBJ_DIR)/,$^)
+	$(AR) rcs $@ $^
 
 bonus: $(LIBFT_OBJECTS_BONUSES)
-	@echo Packing basic files into archive
-	$(AR) rcs $@ $(LIBFT_OBJ_DIR)/$^
+	$(AR) rcs $@ $^
 
 clean: 
-	rm -rf $(LIBFT_OBJ_DIR)
+	@$(RM) $(LIBFT_OBJ_DIR)
 
 fclean: clean
-	rm -rf $(LIBFT_TARGET_NAME)
+	@$(RM) $(LIBFT_TARGET_NAME)
 
 re: fclean all
 
