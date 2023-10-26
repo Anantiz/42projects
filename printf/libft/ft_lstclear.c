@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:39:35 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/25 10:22:10 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/26 15:55:41 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*next_node;
 	t_list	*del_node;
 
-	if (!lst)
+	if (!lst || !del)
 		return ;
 	del_node = *lst;
 	while (del_node)

@@ -62,20 +62,17 @@ LIBFT_FILES=ft_isascii.c \
 
 TEST_FILES=test.c
 
-
 ###
 # OBJECTS ---------------------------------------
 ###
-
-LIBFT_OBJECTS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(LIBFT_FILES))
+LIBFT_FILES := $(addprefix libft/,$(LIBFT_FILES))
+LIBFT_OBJECTS := $(patsubst %.c,$(OBJ_DIR)%.o,$(LIBFT_FILES))
 
 $(OBJ_DIR):
 	mkdir -p $@
 
-$(OBJ_DIR)/%.o:%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -v -c $< -o $@
-
-
+# %.o:%.c | $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) -v -c $<
 
 ###
 # MAIN TARGET -----------------------------------
