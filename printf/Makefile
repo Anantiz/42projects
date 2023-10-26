@@ -1,13 +1,14 @@
 CC=cc
 AR=ar
 CFLAGS=-Wall -Wextra -Werror -I$(HEADERS)
-PRINTF=libprintf.a
-TEST=test
-HEADERS=headers/
-LIBFT=libft.a
 
-PRINTF_FILES =	src/ft_printf.c \
-				src/convert.c \
+HEADERS=headers/
+PRINTF=libprintf.a
+LIBFT=libft.a
+TEST=test
+EXE= $(TEST)
+OBJ=$(LIBFT_OBJECTS) $(PRINTF_OBJECTS) $(TEST_OBJECTS)
+LIBS := $(patsubst lib%.a,%,$(PRINTF) $(LIBFT))
 
 LIBFT_FILES =	ft_isascii.c \
 				ft_memmove.c \
@@ -51,51 +52,61 @@ LIBFT_FILES =	ft_isascii.c \
 				ft_lstdelone.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
-				ft_lstmap.c 
+				ft_lstmap.c \
 
+PRINTF_FILES =	src/ft_printf.c \
+				src/convert.c \
+TEST_FILES= test.c
+
+###
+# OBJECTS ---------------------------------------
+###
+
+LIBFT_OBJECTS=$(LIBFT_FILES:.c=.o)
+PRINTF_OBJECTS=$(PRINTF_FILES:.c=.o)
+TEST_OBJECTS=$(TEST_FILES:.c=.o)
 
 ###
 # MAIN TARGET -----------------------------------
 ###
+
 all:$(PRINTF) $(TEST)
 
-$(PRINTF): PRINTF_OBJECTS
+$(PRINTF): $(PRINTF_OBJECTS)
 	@echo PRINTF
 	$(AR) rcs $@ $^
 
-PRINTF_OBJECTS: $(LIBFT) $(PRINTF_FILES)
-	@echo PRINTF_OBJECTS
-	$(CC) $(CFLAGS) -v -c $>
+$(PRINTF_OBJECTS): $(LIBFT)
 
 ###
 # LIBS ------------------------------------------
 ###
 
-$(LIBFT): LIBFT_OBJECTS
+$(LIBFT): $(LIBFT_OBJECTS)
 	@echo LIBFT
 	$(AR) rcs $@ $^
 
-LIBFT_OBJECTS: $(LIBFT_FILES)
-	@echo Libft OBJECTS
-	$(CC) $(CFLAGS) -v -c $>
+$(LIBFT_OBJECTS): $(LIBFT_FILES)
 
 ###
 # TEST ------------------------------------------
 ###
 
-$(TEST): $(PRINTF)
+$(TEST): $(PRINTF) $(TEST_OBJECTS)
 	@echo test
-	$(CC) $(CFLAGS) test.c -L. -l$(PRINTF) -o $@
+	$(CC) $(CFLAGS) $(TEST_OBJECTS) -L. $(addprefix -l, $(LIBS)) -o $@
+
+$(TEST_OBJECTS): $(TEST_FILES)
 
 ###
 # Utilities -------------------------------------
 ###
 
 clean:
-	rm -rf $(PRINTF_OBJECTS)
+	rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(PRINTF) $(TEST)
+	rm -rf $(EXE) $(LIBS)
 
 re: fclean all
 	
