@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   libprintf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 15:27:49 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/25 10:09:41 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/27 14:50:15 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/27 16:18:30 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PRINTF_H
+# define PRINTF_H
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
-{
-	unsigned int	i;
+# include <stdlib.h>
+# include <limits.h>
+# include <stdarg.h>
 
-	if (!s || !f)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		f(i, s + i);
-		i++;
-	}
-}
+int	ft_printf(const char *s, ...);
+
+#endif

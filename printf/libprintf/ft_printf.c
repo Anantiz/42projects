@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 16:00:39 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/25 10:10:21 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/27 15:15:02 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/27 16:53:03 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libprintf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_printf(const char *s, ...)
 {
-	size_t	len;
-
-	if (!s)
-		return ;
-	len = 0;
-	while (s[len])
-		len++;
-	write(fd, s, len);
+	va_list	args;
+	
+	va_start(args,);
 }

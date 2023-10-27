@@ -6,12 +6,11 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 15:33:40 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/26 15:34:10 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/27 16:17:01 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "printf.h"
+#include "libprintf.h"
 
 int main()
 {
