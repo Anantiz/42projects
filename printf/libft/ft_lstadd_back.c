@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 15:33:40 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 11:28:09 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/24 14:04:34 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/25 10:15:28 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int main()
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	
+	t_list	*last;
+
+	if (!lst)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		last = *lst;
+		while (last->next)
+			last = last->next;
+		last->next = new;
+	}
 }

@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 15:33:40 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 11:28:09 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/24 10:22:53 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/24 10:46:56 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int main()
+int	ft_lstsize(t_list *lst)
 {
-	
+	int	i;
+
+	i = 0;
+	if (lst != NULL)
+	{
+		i++;
+		while (lst->next != NULL)
+		{
+			i++;
+			lst = lst->next;
+		}
+	}
+	return (i);
 }

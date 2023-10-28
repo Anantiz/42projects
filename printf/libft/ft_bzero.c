@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 15:33:40 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 11:28:09 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/17 09:55:46 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/27 12:43:15 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int main()
+void	ft_bzero(void *s, size_t n)
 {
-	
+	size_t	i;
+	char	*target;
+
+	target = s;
+	i = 0;
+	while (i < n)
+	{
+		target[i] = 0;
+		i++;
+	}
 }

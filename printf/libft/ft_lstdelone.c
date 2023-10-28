@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 15:33:40 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 11:28:09 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/24 14:33:04 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/25 10:21:11 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "libft.h"
 
-int main()
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	
+	if (lst && del)
+	{
+		del(lst->content);
+		free(lst);
+	}
 }
