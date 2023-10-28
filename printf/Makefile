@@ -6,12 +6,12 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 09:40:57 by aurban            #+#    #+#              #
-#    Updated: 2023/10/28 11:29:10 by aurban           ###   ########.fr        #
+#    Updated: 2023/10/28 16:36:59 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
-CFLAGS=-Wall -Werror -Wextra -Iincludes
+CFLAGS=-Wall -Werror -Wextra
 RM=rm -rf
 
 NAME=libftprintf.a

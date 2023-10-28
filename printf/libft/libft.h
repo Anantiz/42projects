@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:44:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 09:39:56 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/28 18:35:56 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*New ones*/
+size_t	ft_strappendmax(char *dst, const char *src, size_t offset, size_t max);
 
 #endif
