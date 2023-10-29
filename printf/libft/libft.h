@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:44:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 04:43:15 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 06:13:48 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /*New ones*/
 
-int		ft_strappendmax(char *dst, const char *src, size_t offset, size_t max);
 char	*ft_uitoa(unsigned int n);
 
 #endif

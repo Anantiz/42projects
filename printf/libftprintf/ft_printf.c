@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:15:02 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 05:52:39 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 06:34:54 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	read_format(const char *s, va_list *args)
 		else if (*s == '%')
 		{
 			if (ft_arg_to_buffer(buffer, &bd, args, *(++s)))
-				return (-1);
+				ft_send_char(buffer, &bd, *s);
 			s++;
 		}
 		else
@@ -56,37 +56,14 @@ static int	read_format(const char *s, va_list *args)
 	return (bd.written);
 }
 
-static int	check_input(const char *s)
-{
-	size_t	i;
-
-	if (!s)
-		return (-1);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '%')
-		{
-			i++;
-			if (s[i] != 'c' && s[i] != 's' && s[i] != 'p' && \
-			s[i] != 'd' && s[i] != 'i' && s[i] != 'u' && \
-			s[i] != 'x' && s[i] != 'X' && s[i] != '%')
-				return (-2);
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		check;
 
 	check = 0;
-	check = check_input(format);
-	if (check)
-		return (check);
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	check = read_format(format, &args);
 	va_end(args);

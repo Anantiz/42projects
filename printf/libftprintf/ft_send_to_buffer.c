@@ -27,7 +27,10 @@ static int	ft_arg_to_buff3(char *buff, t_bd *bd, va_list *args, char c)
 	else if (c == '%')
 		ft_send_char(buff, bd, '%');
 	else
+	{
+		ft_send_char(buff, bd, '%');
 		return (-1);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/10/29 02:59:39 by aurban           ###   ########.fr        #
+#    Updated: 2023/10/29 06:13:37 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,8 +61,7 @@ LIB_FT_FILES:=ft_atoi.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
-	ft_uitoa.c \
-	ft_strappendmax.c
+	ft_uitoa.c 
 
 LIB_FT_FILES:= $(addprefix $(LIB_FT_PATH)/,$(LIB_FT_FILES))
 LIB_FT_OBJECTS:= $(patsubst %.c,%.o,$(LIB_FT_FILES))
