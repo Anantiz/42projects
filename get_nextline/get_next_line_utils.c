@@ -6,41 +6,56 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 16:45:43 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 22:50:14 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strndup(const char *s, size_t len)
+char	*ft_strjoin(const char *s1, char const *s2)
 {
-	char	*duplicate_str;
+	char	*joined;
+	size_t	joined_len;
 	size_t	i;
+	size_t	s1_len;
 
-	duplicate_str = malloc((len + 1) * sizeof(char));
-	if (duplicate_str == NULL)
+	if (!s1 || !s2)
 		return (NULL);
-	while (*s && i < len )
+	joined_len = 0;
+	s1_len = 0;
+	while (s1[s1_len])
+		s1_len++;
+	while (s2[joined_len])
+		joined_len++;
+	joined_len += s1_len;
+	joined = malloc((joined_len + 1) * sizeof(char));
+	if (!joined)
+		return (NULL);
+	joined[joined_len] = '\0';
+	i = 0;
+	while (s1[i++])
+		joined[i - 1] = s1[i - 1];
+	i = 0;
+	while (s2[i++])
+		joined[s1_len + i - 1] = s2[i - 1];
+	return (joined);
+}
+
+char	*resize_str(char *buff, int *offset)
+{
+	char	*new_buff;
+
+	*offset += BUFFER_SIZE;
+	new_buff = malloc((*offset + 1) * sizeof(char));
+	if (!new_buff)
+		return (NULL);
+	new_buff[*offset] = '\0';
+	if (buff)
 	{
-		duplicate_str[i] = s[i];
-		i++;
+		while (*buff)
+			*new_buff++ = *buff++;
+		free(buff - offset);
 	}
-	duplicate_str[len] = '\0';
-	return (duplicate_str);
+	return (new_buff - (*offset));
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{	
-	char	*end_ptr;
-
-	if (!s)
-		return (ft_strndup(""), 0);
-	end_ptr = (char *)s;
-	while (*end_ptr)
-		end_ptr++;
-	if (end_ptr - start < s)
-		return (ft_strndup("", 0));
-	if (len > (size_t)(end_ptr - (s + start)))
-		len = end_ptr - (s + start);
-	return (ft_strndup(s + start, len));
-}

@@ -3,18 +3,17 @@
 
 char *foo()
 {
-	return (malloc(0));
+	return (NULL);
 }
 
 int	main(void)
 {
-	int og_result = printf("%s\nsomething", foo());
-	printf("\n_\n");
-	int result = ft_printf("%s\nsomething", foo());
+	printf("%s", NULL);
+	ft_printf("%s", NULL);
 	printf("\n");
 	printf("----------\n");
-	printf("OG Return: %d\n",og_result);
-	printf("Return:    %d\n",result);
+	// printf("OG Return: %d\n",og_result);
+	// printf("Return:    %d\n",result);
 	
 	return (0);
 }
