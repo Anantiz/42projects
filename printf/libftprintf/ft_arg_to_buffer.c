@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:06:49 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 06:40:50 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 18:15:06 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ void	ft_send_char(char *buffer, t_bd *bd, char c)
 		buffer[bd->offset++] = c;
 }
 
-void	ft_send_str(char *buffer, t_bd *bd, char *str)
+void	ft_send_str(char *buffer, t_bd *bd, const char *str)
 {
 	if (!str)
-		return (ft_send_ptr(buffer, bd, str));
+	{
+		ft_send_char(buffer, bd, '(');
+		ft_send_char(buffer, bd, 'n');
+		ft_send_char(buffer, bd, 'u');
+		ft_send_char(buffer, bd, 'l');
+		ft_send_char(buffer, bd, 'l');
+		return (ft_send_char(buffer, bd, ')'));
+	}
 	while (*str)
 	{
 		if (bd->offset == SBUFSIZ)

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:50:15 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 05:45:27 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 17:47:00 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 /*8192 4096 2048 1024*/
 
-# define SBUFSIZ 512
+# define SBUFSIZ 8192
 
 typedef struct s_buffer_data
 {
@@ -31,7 +31,7 @@ void	ft_flush(int fd, char *buffer, t_bd *bd);
 
 int		ft_arg_to_buffer(char *buffer, t_bd *bd, va_list *args, char c);
 void	ft_send_char(char *buffer, t_bd *bd, char c);
-void	ft_send_str(char *buffer, t_bd *bd, char *arg);
+void	ft_send_str(char *buffer, t_bd *bd, const char *str);
 void	ft_send_ptr(char *buffer, t_bd *bd, void *ptr);
 void	ft_send_decimal(char *buffer, t_bd *bd, int n);
 void	ft_send_uint(char *buffer, t_bd *bd, unsigned int n);
