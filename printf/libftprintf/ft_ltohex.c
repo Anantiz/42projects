@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultohex.c                                       :+:      :+:    :+:   */
+/*   ft_ltohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 16:20:17 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 05:29:43 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/29 02:10:09 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/29 05:46:17 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,27 @@ static char	to_base(int c)
 		return ((char)(c + 'a' - 10));
 }
 
-static void	fill_buffer(unsigned long n, char *buffer)
+static void	fill_buffer_neg(long n, char *buffer)
+{
+	if (n < -15)
+		fill_buffer_neg(n / 16, buffer - 1);
+	else
+		*(buffer - 1) = '-';
+	*buffer = to_base((16 - (n % 16)) % 16);
+}
+
+static void	fill_buffer(long n, char *buffer)
 {
 	if (n > 15)
 		fill_buffer(n / 16, buffer - 1);
 	*buffer = to_base(n % 16);
 }
 
-char	*ft_ultohex(unsigned long n)
+char	*ft_ltohex(long n)
 {
-	unsigned long	ncpy;
-	char			*buffer;
-	int				digits;
+	long	ncpy;
+	char	*buffer;
+	int		digits;
 
 	ncpy = n;
 	digits = 0;
@@ -42,20 +51,25 @@ char	*ft_ultohex(unsigned long n)
 		digits++;
 		ncpy /= 16;
 	}
+	if (n < 0)
+		digits++;
 	buffer = malloc(sizeof(char) * (digits + 1));
 	if (!buffer)
 		return (NULL);
-	fill_buffer(n, buffer + digits - 1);
+	if (n >= 0)
+		fill_buffer(n, buffer + digits - 1);
+	else
+		fill_buffer_neg(n, buffer + digits - 1);
 	buffer[digits] = '\0';
 	return (buffer);
 }
 
-char	*ft_ultohex_up(unsigned long n)
+char	*ft_ltohex_up(long n)
 {
 	char	*str;
 	int		i;
 
-	str = ft_ultohex(n);
+	str = ft_ltohex(n);
 	if (!str)
 		return (str);
 	i = 0;

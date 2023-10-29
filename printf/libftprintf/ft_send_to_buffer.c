@@ -1,51 +1,90 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_send_to_buffer.c                                      :+:      :+:    :+:   */
+/*   ft_send_to_buff.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 16:06:49 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 16:09:38 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/29 02:27:45 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/29 02:59:12 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_send_char(char *buffer, int *offset, char *ch)
+static int	ft_arg_to_buff3(char *buff, t_bd *bd, va_list *args, char c)
 {
-	size_t	ncopied;
-	
-	ncopied = ft_strappendmax(buffer, ch, (size_t) offset, BUFSIZ);
-	if (ncopied < 1)
+	unsigned int	un;
+	char			*str;
+
+	if (c == 'X')
 	{
-		flush(1, buffer, offset);
-		send_char(buffer, offset, ch);
+		un = va_arg(*args, unsigned int);
+		str = ft_uitohex_up(un);
+		ft_send_str(buff, bd, str);
+		free(str);
 	}
+	else if (c == '%')
+		ft_send_char(buff, bd, '%');
+	else
+		return (-1);
+	return (0);
 }
 
-void	ft_send_str(char *buffer, int *offset, char *str)
+static int	ft_arg_to_buff2(char *buff, t_bd *bd, va_list *args, char c)
 {
-	size_t	ncopied;
-	
-	ncopied = ft_strappendmax(buffer, str, (size_t) offset, BUFSIZ);
-	if (ncopied < ft_strlen(str))
-	{
-		flush(1, buffer, offset);
-		send_str(buffer, offset, str + ncopied);
+	unsigned int	un;
+	int				n;
+	char			*str;
+
+	if (c == 'i' || c == 'd')
+	{	
+		n = va_arg(*args, int);
+		ft_send_decimal(buff, bd, n);
 	}
+	else if (c == 'u')
+	{	
+		un = va_arg(*args, int);
+		ft_send_uint(buff, bd, un);
+	}
+	else if (c == 'x')
+	{
+		un = va_arg(*args, unsigned int);
+		str = ft_uitohex(un);
+		ft_send_str(buff, bd, str);
+		free(str);
+	}
+	else
+		return (ft_arg_to_buff3(buff, bd, args, c));
+	return (0);
 }
 
-void	ft_send_ptr(char *buffer, int *offset, void *ptr)
+/*
+This atrocity uses if statments because switch are apparently 
+to cool to be used		:(			*sobbing noises*
+*/
+int	ft_arg_to_buffer(char *buff, t_bd *bd, va_list *args, char c)
 {
-	char	*ptr_str;
-	size_t	ncopied;
+	void	*p;
+	char	*ch;
+	int		chr;
 
-	ptr_str = ulltohex((unsigned long long) ptr);
-	ncopied = ft_strappendmax(buffer, ptr_str, (size_t) offset, BUFSIZ);
-	if (ncopied < ft_strlen(ptr_str))
+	if (c == 'c')
 	{
-		ft_strappendmax(buffer, ptr_str + ncopied, (size_t) offset, BUFSIZ);
+		chr = va_arg(*args, int);
+		ft_send_char(buff, bd, (char) chr);
 	}
-	free(ptr_str);
+	else if (c == 's')
+	{
+		ch = va_arg(*args, char *);
+		ft_send_str(buff, bd, ch);
+	}
+	else if (c == 'p')
+	{
+		p = va_arg(*args, void *);
+		ft_send_ptr(buff, bd, p);
+	}
+	else
+		return (ft_arg_to_buff2(buff, bd, args, c));
+	return (0);
 }

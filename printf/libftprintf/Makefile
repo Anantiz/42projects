@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 14:49:11 by aurban            #+#    #+#              #
-#    Updated: 2023/10/28 11:43:21 by aurban           ###   ########.fr        #
+#    Updated: 2023/10/29 05:38:48 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,13 @@ else
 	TARGETS+=libftprintf.a
 endif
 
-LIB__FT_PRINTF_FILES:=ft_printf.c
+LIB__FT_PRINTF_FILES:=ft_printf.c\
+	ft_uitohex.c \
+	ft_ltohex.c \
+	ft_ultohex.c \
+	ft_send_to_buffer.c \
+	ft_arg_to_buffer.c
+	
 LIB__FT_PRINTF_FILES:= $(addprefix $(LIB__FT_PRINTF_PATH)/,$(LIB__FT_PRINTF_FILES))
 LIB__FT_PRINTF_OBJECTS:=$(patsubst %.c,%.o,$(LIB__FT_PRINTF_FILES))
 

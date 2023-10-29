@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:22:59 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/28 18:36:23 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 04:42:59 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ Return --------------------------------
 	size_t = -1 for Null strings
 	Otherwise, the amount of appended char.
 */
-size_t	ft_strappendmax(char *dst, const char *src, size_t offset, size_t max)
+int	ft_strappendmax(char *dst, const char *src, size_t offset, size_t max)
 {
-	size_t	i;
-	size_t	write_size;
+	int	i;
+	int	write_size;
 
 	if (!src || !dst)
 		return (-1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultohex.c                                       :+:      :+:    :+:   */
+/*   ft_uitohex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:20:17 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 05:29:43 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/29 05:45:20 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ static char	to_base(int c)
 		return ((char)(c + 'a' - 10));
 }
 
-static void	fill_buffer(unsigned long n, char *buffer)
+static void	fill_buffer(unsigned int n, char *buffer)
 {
 	if (n > 15)
 		fill_buffer(n / 16, buffer - 1);
 	*buffer = to_base(n % 16);
 }
 
-char	*ft_ultohex(unsigned long n)
+char	*ft_uitohex(unsigned int n)
 {
-	unsigned long	ncpy;
+	unsigned int	ncpy;
 	char			*buffer;
 	int				digits;
 
@@ -50,12 +50,12 @@ char	*ft_ultohex(unsigned long n)
 	return (buffer);
 }
 
-char	*ft_ultohex_up(unsigned long n)
+char	*ft_uitohex_up(unsigned int n)
 {
 	char	*str;
 	int		i;
 
-	str = ft_ultohex(n);
+	str = ft_uitohex(n);
 	if (!str)
 		return (str);
 	i = 0;
