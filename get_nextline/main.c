@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 13:08:06 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 13:57:50 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/31 14:26:57 by aurban            #+#    #+#             */
+/*   Updated: 2023/10/31 14:29:06 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include "get_next_line.h"
+#include <fcntl.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	main(void)
 {
-	void	*ptr;
-	size_t	max;
-
-	max = 0;
-	if (size != 0 && ((max - 1) / size) < nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (ptr)
-		ft_bzero(ptr, nmemb * size);
-	return (ptr);
+	char	*line;
+	int fd = open("testfile", O_RDONLY);
+	
+	int i = 0;
+	while (i < 5)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		i++;
+	}
+	close(fd);
+	return (0);
 }
