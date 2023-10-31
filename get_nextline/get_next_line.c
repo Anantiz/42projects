@@ -6,23 +6,25 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:31:41 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 14:44:15 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/31 16:07:55 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "limits.h"
 
-get_buffer_from_fd(int fd, char **buff_lst)
+
+static char	*get_buffer_from_fd(int fd, char **buff_lst)
 {
 	int		i;
 	char	*buffer;
 
 	i = 0;
-	if (buff_lst[MAX_FD_HANDLE] != 4294967293)
+	if (buff_lst[MAX_FD_HANDLE] != *buff_lst)
 	{
 		while (i < MAX_FD_HANDLE - 1)
-			buff_lst[i++] == NULL;
-		buff_lst[MAX_FD_HANDLE] = 4294967293;
+			buff_lst[i++] = 0;
+		buff_lst[MAX_FD_HANDLE] = *buff_lst;
 		i = 0;
 	}
 	if (fd < MAX_FD_HANDLE && buff_lst[fd])
@@ -47,6 +49,7 @@ static ssize_t	process_buffer(int fd, char *buffer, t_my_str *str)
 	i = 0;
 	while (buffer[i])
 	{
+		printf("buffer[%zu] = %c\n", i,buffer[i]);
 		if (str->position - 1 >= str->size)
 			resize_str(str);
 		str->str[i + str->position] = buffer[i];
@@ -77,7 +80,8 @@ char	*get_next_line(int fd)
 		if (process_buffer(fd, buffer, str) == -1)
 			break ;
 	}
-	ret_str = str_nulltrim(str)->str;
-	del_str(str);
+	str = str_nulltrim(str);
+	ret_str = str->str;
+	free (str);
 	return (ret_str);
 }
