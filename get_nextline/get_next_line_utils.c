@@ -6,56 +6,90 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 22:50:14 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/31 11:22:20 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(const char *s1, char const *s2)
+t_my_str	*resize_str(t_my_str *str)
 {
-	char	*joined;
-	size_t	joined_len;
+	char	*new_str;
 	size_t	i;
-	size_t	s1_len;
 
-	if (!s1 || !s2)
+	if (str->str == NULL)
+		str->size = 16;
+	else
+		str->size += str->size / 2;
+	new_str = malloc((str->size + 1) * sizeof(char));
+	if (!new_str)
 		return (NULL);
-	joined_len = 0;
-	s1_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	while (s2[joined_len])
-		joined_len++;
-	joined_len += s1_len;
-	joined = malloc((joined_len + 1) * sizeof(char));
-	if (!joined)
-		return (NULL);
-	joined[joined_len] = '\0';
 	i = 0;
-	while (s1[i++])
-		joined[i - 1] = s1[i - 1];
-	i = 0;
-	while (s2[i++])
-		joined[s1_len + i - 1] = s2[i - 1];
-	return (joined);
-}
-
-char	*resize_str(char *buff, int *offset)
-{
-	char	*new_buff;
-
-	*offset += BUFFER_SIZE;
-	new_buff = malloc((*offset + 1) * sizeof(char));
-	if (!new_buff)
-		return (NULL);
-	new_buff[*offset] = '\0';
-	if (buff)
+	if (str->str)
 	{
-		while (*buff)
-			*new_buff++ = *buff++;
-		free(buff - offset);
+		while (str->str[i++])
+			new_str[i - 1] = str->str[i - 1];
+		free(str->str);
 	}
-	return (new_buff - (*offset));
+	while (i < str->size)
+		new_str[i++] = 0;
+	return (new_str);
 }
 
+t_my_str	*str_nulltrim(t_my_str *str)
+{
+	size_t	i;
+	char	*new_str;
+
+	if (!str || !str->str)
+		return (str);
+	i = 0;
+	while (str->str[i])
+		i++;
+	if (i < str->size)
+	{
+		new_str = malloc(sizeof(char) * (i + 1));
+		if (!new_str)
+			return (str);
+		i = 0;
+		while (str->str[i++])
+			new_str[i - 1] = str->str[i - 1];
+		new_str[i] = '\0';
+		str->size = i;
+		free(str->str);
+		str->str = new_str;
+	}
+	return (str);
+}
+
+/*
+To upgrade once I can Use Libft
+*/
+t_my_str	*new_str(const char *s)
+{
+	t_my_str	*new_str;
+	char		*str_in;
+	
+	new_str = malloc(sizeof(t_my_str));
+	if (!new_str)
+		return (NULL);
+	if (s)
+		new_str->size = 1;
+	else 
+		new_str->size = 0;
+	str_in = malloc(sizeof(char) * (new_str->size + 1));
+	if (!str_in)
+	{
+		free(new_str);
+		return (NULL);
+	}
+	str_in[new_str->size] = '\0';
+	new_str->str = str_in;
+	return (new_str);
+}
+void	del_str(t_my_str *str)
+{
+	if (str)
+		free(str->str);
+	free(str);
+}

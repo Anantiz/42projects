@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:06:55 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/29 22:50:31 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/31 11:20:44 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 256
 # endif
+
+# define MAX_FD_HANDLE 1024
+
+typedef	struct s_my_str
+{
+	char	*str;
+	size_t	size;
+}t_my_str;
 
 char	*get_next_line(int fd);
 
-char	*resize_str(char *buff, int *offset);
-char	*ft_strjoin(const char *s1, char const *s2);
+t_my_str	*resize_str(t_my_str *str);
+t_my_str	*new_str(const char *s);
+void		del_str(t_my_str *str);
 
 #endif
