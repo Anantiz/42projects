@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:26:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 16:02:49 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/31 19:12:52 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int	main(void)
 	while (i < 5)
 	{
 		line = get_next_line(fd);
-		printf("Line n %d :\n", i);
 		fflush(stdout);
-		printf("%s.\n", line);
+		printf("Line n %d :\n%s.\n", i, line);
 		fflush(stdout);
+		free(line);
 		i++;
 	}
-	free(line);
 	close(fd);
 	return (0);
 }

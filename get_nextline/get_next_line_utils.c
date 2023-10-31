@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 14:19:42 by aurban           ###   ########.fr       */
+/*   Updated: 2023/10/31 19:38:41 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_my_str	*resize_str(t_my_str *str)
 	}
 	while (i < str->size)
 		new_str[i++] = 0;
+	str->str = new_str;
 	return (str);
 }
 
@@ -74,7 +75,7 @@ t_my_str	*str_nulltrim(t_my_str *str)
 /*
 To upgrade once I can Use Libft
 */
-t_my_str	*new_str(const char *s)
+t_my_str	*new_str(size_t size)
 {
 	t_my_str	*new_str;
 	char		*str_in;
@@ -82,19 +83,19 @@ t_my_str	*new_str(const char *s)
 	new_str = malloc(sizeof(t_my_str));
 	if (!new_str)
 		return (NULL);
-	if (s)
-		new_str->size = 1;
-	else
-		new_str->size = 0;
+	new_str->size = 0;
 	new_str->position = 0;
-	str_in = malloc(sizeof(char) * (new_str->size + 1));
-	if (!str_in)
+	if (size)
 	{
-		free(new_str);
-		return (NULL);
-	}
-	str_in[new_str->size] = '\0';
-	new_str->str = str_in;
+		new_str->str = malloc(size * sizeof(char));
+		if (!new_str->str)
+		{
+			free(new_str);
+			return (NULL);
+		}
+	}		
+	else
+		new_str->str = NULL;
 	return (new_str);
 }
 
