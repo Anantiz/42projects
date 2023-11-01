@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:26:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 19:12:52 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:23:42 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	main(void)
 	char	*line;
 	int fd = open("testfile", O_RDONLY);
 	
-	int i = 0;
-	while (i < 5)
+	int i = 1;
+	while (i < 8)
 	{
 		line = get_next_line(fd);
 		fflush(stdout);
-		printf("Line n %d :\n%s.\n", i, line);
+		printf("/Line n %d :\n%s", i, line);
 		fflush(stdout);
 		free(line);
 		i++;

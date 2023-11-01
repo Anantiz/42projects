@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 19:38:41 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:24:10 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_my_str	*resize_str(t_my_str *str)
 }
 
 /*
-Remove the NULL padding if there is one.
+Realocate a new str->str without null padding
 */
 t_my_str	*str_nulltrim(t_my_str *str)
 {
@@ -78,13 +78,13 @@ To upgrade once I can Use Libft
 t_my_str	*new_str(size_t size)
 {
 	t_my_str	*new_str;
-	char		*str_in;
+	size_t		i;
 
 	new_str = malloc(sizeof(t_my_str));
 	if (!new_str)
 		return (NULL);
-	new_str->size = 0;
-	new_str->position = 0;
+	new_str->size = size;
+	new_str->pos = 0;
 	if (size)
 	{
 		new_str->str = malloc(size * sizeof(char));
@@ -93,6 +93,9 @@ t_my_str	*new_str(size_t size)
 			free(new_str);
 			return (NULL);
 		}
+		i = 0;
+		while (i < size)
+			new_str->str[i++] = '\0';
 	}		
 	else
 		new_str->str = NULL;
@@ -105,4 +108,13 @@ void	*del_str(t_my_str *str)
 		free(str->str);
 	free(str);
 	return (NULL);
+}
+
+char	*free_str(t_my_str *str)
+{
+	char	*temp;
+
+	temp = str->str;
+	free(str);
+	return (temp);
 }

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:06:55 by aurban            #+#    #+#             */
-/*   Updated: 2023/10/31 19:38:48 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:18:35 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-# include <stdio.h>
-# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 256
@@ -29,11 +26,16 @@ typedef struct s_my_str
 {
 	char	*str;
 	size_t	size;
-	size_t	position;
+	size_t	pos;
 }t_my_str;
 
 char		*get_next_line(int fd);
 
+/*
+Supper string class
+*/
+
+char		*free_str(t_my_str *str);
 void		*del_str(t_my_str *str);
 t_my_str	*new_str(size_t size);
 t_my_str	*resize_str(t_my_str *str);
