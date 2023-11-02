@@ -6,39 +6,45 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 11:20:20 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/01 12:36:37 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/02 11:48:11 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_my_str	*get_buffer(int fd, t_my_str **buff_lst)
+static t_my_str	*get_buff(int fd, t_my_str **buff_lst)
 {
-	t_my_str	*read_buff;
+	t_my_str	*new_str;
 
-	if (buff_lst[fd] != NULL)
-		return (buff_lst[fd]);
-	read_buff = new_str(BUFFER_SIZE);
-	if (!read_buff)
+	if (fd > MAX_FD_HANDLE)
 		return (NULL);
-	buff_lst[fd] = read_buff;
-	return (read_buff);
+	if (buff_lst[fd])
+		return (buff_lst[fd]);
+	new_str = create_new_str(BUFFER_SIZE);
+	if (!new_str || !new_str->str)
+		return (del_str(new_str));
+	buff_lst[fd] = new_str;
+	return (new_str);
 }
 
-int	fill_out_str(t_my_str *r_buff, t_my_str *out)
+static int	fill_out_str(t_my_str *r_buff, t_my_str *out)
 {
+	char *check_mem;
+
 	while (r_buff->pos < r_buff->size && r_buff->str[r_buff->pos])
 	{
 		if (out->pos == out->size)
 		{
-			if (resize_str(out)->str == NULL)
+			check_mem = out->str;
+			resize_str(out);
+			if (out->str == NULL || check_mem == out->str)
 				return (-1);
 		}
 		out->str[out->pos++] = r_buff->str[r_buff->pos++];
 		if (out->str[out->pos - 1] == '\n')
 			return (-1);
 	}
-	if (r_buff->str[r_buff->pos] == '\0')
+	if (r_buff->pos < r_buff->size && r_buff->str[r_buff->pos] == '\0')
 	{
 		out->str[out->pos] = r_buff->str[r_buff->pos];
 		return (-1);
@@ -48,15 +54,15 @@ int	fill_out_str(t_my_str *r_buff, t_my_str *out)
 
 char	*get_next_line(int fd)
 {
-	static t_my_str	*buff_lst[MAX_FD_HANDLE];
-	t_my_str		*read_buff;
-	t_my_str		*out_str;
-	ssize_t			nread;
+	static t_my_str		*buff_lst[MAX_FD_HANDLE];
+	t_my_str			*read_buff;
+	t_my_str			*out_str;
+	ssize_t				nread;
 
-	read_buff = get_buffer(fd, buff_lst);
+	read_buff = get_buff(fd, buff_lst);
 	if (!read_buff)
 		return (NULL);
-	out_str = new_str(0);
+	out_str = create_new_str(0);
 	if (!out_str)
 		return (NULL);
 	while (1)

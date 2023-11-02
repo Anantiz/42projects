@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/01 12:24:10 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/02 11:45:16 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ t_my_str	*resize_str(t_my_str *str)
 	if (!new_str)
 		return (str);
 	i = 0;
-	if (str->str)
+	if (str->str != NULL)
 	{
-		while (str->str[i++])
-			new_str[i - 1] = str->str[i - 1];
+		while (str->str[i])
+		{
+			new_str[i] = str->str[i];
+			i++;
+		}
 		free(str->str);
 	}
 	while (i < str->size)
@@ -64,8 +67,8 @@ t_my_str	*str_nulltrim(t_my_str *str)
 		i = 0;
 		while (str->str[i++])
 			new_str[i - 1] = str->str[i - 1];
-		new_str[i] = '\0';
-		str->size = i;
+		new_str[i - 1] = '\0';
+		str->size = i - 1;
 		free(str->str);
 		str->str = new_str;
 	}
@@ -74,8 +77,9 @@ t_my_str	*str_nulltrim(t_my_str *str)
 
 /*
 To upgrade once I can Use Libft
+Size includes the NULL charachter
 */
-t_my_str	*new_str(size_t size)
+t_my_str	*create_new_str(size_t size)
 {
 	t_my_str	*new_str;
 	size_t		i;
