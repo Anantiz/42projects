@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:40:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/02 11:45:16 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/02 20:00:47 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ Copies the current string into the new space and padd
 	the remaining space with zeros
 return (str);
 */
-t_my_str	*resize_str(t_my_str *str)
+int	resize_str(t_my_str *str)
 {
 	char	*new_str;
 	size_t	i;
 
-	if (str->str == NULL)
+	if (str->str == NULL || str->size == 0)
 		str->size = 16;
 	else
 		str->size += str->size / 2;
 	new_str = malloc((str->size + 1) * sizeof(char));
 	if (!new_str)
-		return (str);
+		return (-1);
 	i = 0;
 	if (str->str != NULL)
 	{
@@ -43,7 +43,7 @@ t_my_str	*resize_str(t_my_str *str)
 	while (i < str->size)
 		new_str[i++] = 0;
 	str->str = new_str;
-	return (str);
+	return (1);
 }
 
 /*
@@ -51,7 +51,7 @@ Realocate a new str->str without null padding
 */
 t_my_str	*str_nulltrim(t_my_str *str)
 {
-	size_t	i;
+	ssize_t	i;
 	char	*new_str;
 
 	if (!str || !str->str)
@@ -59,17 +59,16 @@ t_my_str	*str_nulltrim(t_my_str *str)
 	i = 0;
 	while (str->str[i])
 		i++;
-	if (i < str->size)
+	if ((size_t) i < str->size)
 	{
 		new_str = malloc(sizeof(char) * (i + 1));
-		new_str = NULL;
 		if (!new_str)
 			return (str);
-		i = 0;
-		while (str->str[i++])
-			new_str[i - 1] = str->str[i - 1];
-		new_str[i - 1] = '\0';
-		str->size = i - 1;
+		i = -1;
+		while (str->str[++i])
+			new_str[i] = str->str[i];
+		new_str[i] = '\0';
+		str->size = i;
 		free(str->str);
 		str->str = new_str;
 	}
