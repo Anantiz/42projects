@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 12:42:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/03 13:14:12 by aurban           ###   ########.fr       */
+/*   Created: 2023/10/29 16:06:55 by aurban            #+#    #+#             */
+/*   Updated: 2023/11/02 20:00:14 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,23 @@
 
 # define MAX_FD_HANDLE 1024
 
-char	*get_next_line(int fd);
-char	*resize_line(char *old_line, size_t new_size);
+typedef struct s_my_str
+{
+	char	*str;
+	size_t	size;
+	size_t	pos;
+}t_my_str;
+
+char		*get_next_line(int fd);
+
+/*
+Supper string class
+*/
+
+char		*free_str(t_my_str *str);
+void		*del_str(t_my_str *str);
+t_my_str	*create_new_str(size_t size);
+int			resize_str(t_my_str *str);
+t_my_str	*str_nulltrim(t_my_str *str);
 
 #endif

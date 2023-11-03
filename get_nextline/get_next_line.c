@@ -5,79 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 11:20:20 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/02 20:00:29 by aurban           ###   ########.fr       */
+/*   Created: 2023/11/03 12:42:06 by aurban            #+#    #+#             */
+/*   Updated: 2023/11/03 13:25:26 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_my_str	*get_buff(int fd, t_my_str **buff_lst)
-{
-	t_my_str	*new_str;
+#define RESIZE_CHUNK 64
 
-	if (fd >= MAX_FD_HANDLE)
+static char	*get_buff(int fd, char **buffers_list)
+{
+	if (fd > MAX_FD_HANDLE || fd < 0)
 		return (NULL);
-	if (buff_lst[fd])
-		return (buff_lst[fd]);
-	new_str = create_new_str(BUFFER_SIZE);
-	if (!new_str || !new_str->str)
-		return (del_str(new_str));
-	buff_lst[fd] = new_str;
-	return (new_str);
+	if (buffers_list[fd])
+		return (buffers_list[fd]);
+	buffers_list[fd] = malloc(BUFFER_SIZE + 1);
+	if (!buffers_list[fd])
+		return (NULL);
+	buffers_list[fd][0] = '\0';
+	buffers_list[fd][BUFFER_SIZE] = '\0';
+	return (buffers_list[fd]);
 }
 
-static ssize_t	read_file(int fd, t_my_str *r_buff)
-{	
+static char	*put_buffer_in_line(char *buff, char *line)
+{
+	size_t	i;
+	size_t	l_offst;
+
+	i = 0;
+	l_offst = 0;
+	while (buff[i])
+	{
+		line[i] = buff[i];
+		if (buff[i] == '\n' || buff[i] == '\0') // New line found, just return it, and clean buffer
+		{
+			move_buffer_to_front();
+			break ;
+		}
+		if (i + l_offst == RESIZE_CHUNK)
+		{
+			line = resize_line(line, i + l_offst + RESIZE_CHUNK);
+			l_offst = i;
+		}
+	}
+	return (line);
+}
+
+static char	*read_buffer(int fd, char *buff, char *line)	
+{
 	ssize_t	nread;
 
-	nread = 0;
-	if (r_buff->pos == 0 || r_buff->pos == r_buff-> size)
+	if (*buff == 0)
+		nread = read(fd, buff, BUFFER_SIZE);
+	if (*buff != 0 && nread >= 0)
 	{
-		r_buff->pos = 0;
-		nread = read(fd, r_buff->str, r_buff->size);
-		if (nread >= 0)
-			r_buff->size = (size_t) nread;
+		line = put_buffer_in_line(buff, line);
+		return (line);
 	}
-	return (nread);
-}
-
-static int	fill_out_str(int fd, t_my_str *r_buff, t_my_str *out)
-{
-	if (read_file(fd, r_buff) < 0)
-		return (-2);
-	while (r_buff->pos < r_buff->size)
-	{
-		if (out->pos == out->size)
-			if (resize_str(out) == -1)
-				return (-1);
-		out->str[out->pos++] = r_buff->str[r_buff->pos++];
-		if (out->str[out->pos - 1] == '\n' || out->str[out->pos - 1] == '\0')
-			return (1);
-	}
-	return (1);
+	else
+		return (clean_everything(buff, line));
 }
 
 char	*get_next_line(int fd)
 {
-	static t_my_str		*buff_lst[MAX_FD_HANDLE];
-	t_my_str			*read_buff;
-	t_my_str			*out_str;
-	int					code;
+	static char	*buffers_list[MAX_FD_HANDLE];
+	char		*line;
+	char		*buff;
 
-	read_buff = get_buff(fd, buff_lst);
-	if (!read_buff)
+	buff = get_buff(fd, buffers_list);
+	if (!buff)
 		return (NULL);
-	out_str = create_new_str(0);
-	if (!out_str)
-		return (NULL);
-	while (1)
+	line = resize_line(NULL, RESIZE_CHUNK);
+	if (!line)
 	{
-		code = fill_out_str(fd, read_buff, out_str);
-		if (code == 1)
-			break ;
-		if (code == -1 || code == -2)
-			return (del_str(out_str));
+		free(buff);
+		return (NULL);
 	}
-	return (free_str(str_nulltrim(out_str)));
+	line = read_buffer(fd, buff, line); // Will only ever return Either a valid full line or NULL
+	if (line == NULL)
+		free(buffers_list[fd]);
+	return (line);
 }

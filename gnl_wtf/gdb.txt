@@ -1,0 +1,764 @@
+Breakpoint 1 at 0x401333: file get_next_line.c, line 49.
+Breakpoint 2 at 0x401358: file get_next_line.c, line 50.
+Breakpoint 3 at 0x4013b6: file get_next_line.c, line 55.
+Breakpoint 4 at 0x4013c2: file get_next_line.c, line 56.
+Breakpoint 5 at 0x40143b: file get_next_line.c, line 61.
+Breakpoint 6 at 0x40151c: file get_next_line_utils.c, line 26.
+Breakpoint 7 at 0x40162f: file get_next_line_utils.c, line 45.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 256
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 ""
+4: out->str = 0x0
+5: out->pos = 0
+6: out->size = 0
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x0
+5: out->pos = 0
+6: out->size = 0
+
+Breakpoint 6, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		if (str->str == NULL || str->size == 0)
+
+Breakpoint 7, resize_str (str=0x4073d0) at get_next_line_utils.c:45
+45		str->str = new_str;
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 1
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0"
+5: out->pos = 1
+6: out->size = 16
+gdb_commands.gdb:33: Error in sourced command file:
+No symbol "str" in current context.
+59				out->str[out->pos] = r_buff->str[r_buff->pos];
+1: r_buff->size = 41
+2: r_buff->pos = 1
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0"
+5: out->pos = 1
+6: out->size = 16
+A syntax error in expression, near `str->size'.
+
+quit
+Breakpoint 1 at 0x401333: file get_next_line.c, line 49.
+Breakpoint 2 at 0x401358: file get_next_line.c, line 50.
+Breakpoint 3 at 0x4013b6: file get_next_line.c, line 55.
+Breakpoint 4 at 0x4013c2: file get_next_line.c, line 56.
+Breakpoint 5 at 0x40143b: file get_next_line.c, line 61.
+Breakpoint 6 at 0x40151c: file get_next_line_utils.c, line 26.
+Breakpoint 7 at 0x40162f: file get_next_line_utils.c, line 45.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 256
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 ""
+4: out->str = 0x0
+5: out->pos = 0
+6: out->size = 0
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x0
+5: out->pos = 0
+6: out->size = 0
+
+Breakpoint 6, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		if (str->str == NULL || str->size == 0)
+
+Breakpoint 7, resize_str (str=0x4073d0) at get_next_line_utils.c:45
+45		str->str = new_str;
+7: str->str = 0x0
+8: str->size = 16
+9: str->pos = 0
+10: new_str = 0x4073f0 ""
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 1
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0"
+5: out->pos = 1
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 2
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "01"
+5: out->pos = 2
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 3
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "012"
+5: out->pos = 3
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 4
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0123"
+5: out->pos = 4
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 5
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "01234"
+5: out->pos = 5
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 6
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "012345"
+5: out->pos = 6
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 7
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0123456"
+5: out->pos = 7
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 8
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "01234567"
+5: out->pos = 8
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 9
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "012345678"
+5: out->pos = 9
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 10
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0123456789"
+5: out->pos = 10
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 11
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "01234567890"
+5: out->pos = 11
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 12
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "012345678901"
+5: out->pos = 12
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 13
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0123456789012"
+5: out->pos = 13
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 14
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "01234567890123"
+5: out->pos = 14
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 15
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "012345678901234"
+5: out->pos = 15
+6: out->size = 16
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 16
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x4073f0 "0123456789012345"
+5: out->pos = 16
+6: out->size = 16
+
+Breakpoint 6, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		if (str->str == NULL || str->size == 0)
+7: str->str = 0x4073f0 "0123456789012345"
+8: str->size = 16
+9: str->pos = 16
+10: new_str = 0x4073f0 "0123456789012345"
+
+Breakpoint 7, resize_str (str=0x4073d0) at get_next_line_utils.c:45
+45		str->str = new_str;
+7: str->str = 0x4073f0 "\a\004"
+8: str->size = 25
+9: str->pos = 16
+10: new_str = 0x407410 "0123456789012345"
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 17
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "01234567890123456"
+5: out->pos = 17
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 18
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "012345678901234567"
+5: out->pos = 18
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 19
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "0123456789012345678"
+5: out->pos = 19
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 20
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "01234567890123456789"
+5: out->pos = 20
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 21
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "012345678901234567890"
+5: out->pos = 21
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 22
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "0123456789012345678901"
+5: out->pos = 22
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 23
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "01234567890123456789012"
+5: out->pos = 23
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 24
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "012345678901234567890123"
+5: out->pos = 24
+6: out->size = 25
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 25
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407410 "0123456789012345678901234"
+5: out->pos = 25
+6: out->size = 25
+
+Breakpoint 6, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		if (str->str == NULL || str->size == 0)
+7: str->str = 0x407410 "0123456789012345678901234"
+8: str->size = 25
+9: str->pos = 25
+10: new_str = 0x407410 "0123456789012345678901234"
+
+Breakpoint 7, resize_str (str=0x4073d0) at get_next_line_utils.c:45
+45		str->str = new_str;
+7: str->str = 0x407410 "\a\004"
+8: str->size = 38
+9: str->pos = 25
+10: new_str = 0x407440 "0123456789012345678901234"
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 26
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "01234567890123456789012345"
+5: out->pos = 26
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 27
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "012345678901234567890123456"
+5: out->pos = 27
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 28
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "0123456789012345678901234567"
+5: out->pos = 28
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 29
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "01234567890123456789012345678"
+5: out->pos = 29
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 30
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "012345678901234567890123456789"
+5: out->pos = 30
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 31
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "0123456789012345678901234567890"
+5: out->pos = 31
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 32
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "01234567890123456789012345678901"
+5: out->pos = 32
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 33
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "012345678901234567890123456789012"
+5: out->pos = 33
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 34
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "0123456789012345678901234567890123"
+5: out->pos = 34
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 35
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "01234567890123456789012345678901234"
+5: out->pos = 35
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 36
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "012345678901234567890123456789012345"
+5: out->pos = 36
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 37
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "0123456789012345678901234567890123456"
+5: out->pos = 37
+6: out->size = 38
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 38
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407440 "01234567890123456789012345678901234567"
+5: out->pos = 38
+6: out->size = 38
+
+Breakpoint 6, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		if (str->str == NULL || str->size == 0)
+7: str->str = 0x407440 "01234567890123456789012345678901234567"
+8: str->size = 38
+9: str->pos = 38
+10: new_str = 0x407440 "01234567890123456789012345678901234567"
+
+Breakpoint 7, resize_str (str=0x4073d0) at get_next_line_utils.c:45
+45		str->str = new_str;
+7: str->str = 0x407440 "\027p@"
+8: str->size = 58
+9: str->pos = 38
+10: new_str = 0x407470 "01234567890123456789012345678901234567"
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 39
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "012345678901234567890123456789012345678"
+5: out->pos = 39
+6: out->size = 58
+
+Breakpoint 4, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:56
+56				if (out->pos >= out->size)
+1: r_buff->size = 41
+2: r_buff->pos = 40
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "0123456789012345678901234567890123456789"
+5: out->pos = 40
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 41
+2: r_buff->pos = 41
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 41
+2: r_buff->pos = 41
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49			if (r_buff->pos == 0 || r_buff->pos == r_buff->size)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+Breakpoint 2, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:50
+50				if (read_file(fd, r_buff) < 0)
+1: r_buff->size = 0
+2: r_buff->pos = 0
+3: r_buff->str = 0x4072c0 "01234567890123456789012345678901234567890"
+4: out->str = 0x407470 "01234567890123456789012345678901234567890"
+5: out->pos = 41
+6: out->size = 58
+
+quit
+Breakpoint 1 at 0x401333: file get_next_line.c, line 49.
+Breakpoint 2 at 0x401358: file get_next_line.c, line 50.
+Breakpoint 3 at 0x4013b6: file get_next_line.c, line 55.
+Breakpoint 4 at 0x4013c2: file get_next_line.c, line 56.
+Breakpoint 5 at 0x40143b: file get_next_line.c, line 61.
+Breakpoint 6 at 0x40151c: file get_next_line_utils.c, line 26.
+Breakpoint 7 at 0x40162f: file get_next_line_utils.c, line 45.
+gdb_commands.gdb:14: Error in sourced command file:
+No symbol "r_buff" in current context.
+
+quit
