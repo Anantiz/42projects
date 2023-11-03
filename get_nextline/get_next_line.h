@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:42:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/03 13:14:12 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/03 16:58:16 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define MAX_FD_HANDLE 1024
 
 char	*get_next_line(int fd);
-char	*resize_line(char *old_line, size_t new_size);
+ssize_t	refill_buff(int fd, char *buff);
+char	*resize_line(char *s1, size_t added_size);
 
 #endif
