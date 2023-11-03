@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:13:20 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/03 17:00:03 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/03 20:29:27 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*resize_line(char *s1, size_t added_size)
 	{
 		while (s1[j])
 			joined[i++] = s1[j++];
-		free(s1);
 	}
 	while (i <= joined_size)
 		joined[i++] = '\0';
@@ -44,8 +43,27 @@ ssize_t	refill_buff(int fd, char *buff)
 {
 	ssize_t	nread;
 
-	nread = 1;
-	if (*buff == 0)
-		nread = read(fd, buff, BUFFER_SIZE);
+	nread = read(fd, buff, BUFFER_SIZE);
+	if (nread >= 0)
+		buff[nread] = '\0';
+	else
+		buff[0] = '\0';
 	return (nread);
+}
+
+char	*get_buff(int fd, char **buffers_list)
+{
+	size_t	i;
+
+	if (fd > MAX_FD_HANDLE || fd < 0)
+		return (NULL);
+	if (buffers_list[fd])
+		return (buffers_list[fd]);
+	buffers_list[fd] = malloc(BUFFER_SIZE + 1);
+	if (!buffers_list[fd])
+		return (NULL);
+	i = 0;
+	while (i < BUFFER_SIZE)
+		buffers_list[fd][i++] = '\0';
+	return (buffers_list[fd]);
 }

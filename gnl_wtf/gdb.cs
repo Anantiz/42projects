@@ -762,3 +762,18 @@ gdb_commands.gdb:14: Error in sourced command file:
 No symbol "r_buff" in current context.
 
 quit
+Breakpoint 1 at 0x401333: file get_next_line.c, line 49.
+Breakpoint 2 at 0x40151c: file get_next_line_utils.c, line 26.
+Breakpoint 3 at 0x40162f: file get_next_line_utils.c, line 45.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, fill_out_str (fd=3, r_buff=0x4072a0, out=0x4073d0) at get_next_line.c:49
+49					if (!line)
+
+Breakpoint 2, resize_str (str=0x4073d0) at get_next_line_utils.c:26
+26		joined_size += added_size;
+gdb_commands.gdb:24: Error in sourced command file:
+Undefined command: "$i".  Try "help".
+
+quit
