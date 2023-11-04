@@ -6,12 +6,15 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 13:13:20 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/03 20:29:27 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/04 12:21:27 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/*
+Une sorte de join modifier
+*/
 char	*resize_line(char *s1, size_t added_size)
 {
 	char	*joined;
@@ -36,6 +39,8 @@ char	*resize_line(char *s1, size_t added_size)
 	}
 	while (i <= joined_size)
 		joined[i++] = '\0';
+	if (s1)
+		free(s1);
 	return (joined);
 }
 
@@ -63,7 +68,31 @@ char	*get_buff(int fd, char **buffers_list)
 	if (!buffers_list[fd])
 		return (NULL);
 	i = 0;
-	while (i < BUFFER_SIZE)
+	while (i <= BUFFER_SIZE)
 		buffers_list[fd][i++] = '\0';
 	return (buffers_list[fd]);
+}
+
+char	*str_nulltrim(char *str)
+{
+	size_t	i;
+	char	*new_str;
+
+	if (!str)
+		return (str);
+	i = 0;
+	while (str[i])
+		i++;
+	new_str = malloc(sizeof(char) * (i + 1));
+	if (!new_str)
+		return (str);
+	i = 0;
+	while (str[i])
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	free(str);
+	return (new_str);
 }
