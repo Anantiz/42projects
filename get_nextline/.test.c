@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:58:09 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/04 12:35:40 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/05 13:10:29 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	main()
 {
 	int	fd1, fd2;
 	char *line;
-	fd1 = open("file1.txt", O_RDONLY);
+	fd1 = open(".file1.txt", O_RDONLY);
 	fd2 = 0;
 	
-	// fd2 = open("ftest.txt", O_RDONLY);
+	// fd2 = open(".ftest.txt", O_RDONLY);
 
 	// printf("FD1=%d\tFD2=%d\n\n",fd1, fd2);
 
-	for (int i = 1; i < 7 ; i++)
+	for (int i = 1; i < 9; i++)
 	{
 		// fflush(stdout);
 		line = get_next_line(fd1);
@@ -42,7 +42,6 @@ int	main()
 			// fflush(stdout);
 			free(line);
 		}
-		printf("\n\n");
 	}
 	close (fd1);
 	if (fd2)

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:42:06 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/05 10:43:15 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/05 13:30:59 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	copy_buffer(char **buff, char **line, size_t *i, size_t *l_offst)
 	{
 		(*line)[*i + *l_offst] = (*buff)[*i];
 		move_index_to_front((*buff), *i);
-		if (*i != 0 && (*buff)[*i] == '\0')
+		if (*i != 0 && (*line)[*i] == '\0')
 			return (0);
 		else
 			return (420);
