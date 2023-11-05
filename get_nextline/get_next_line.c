@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:42:06 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/04 12:32:59 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/05 10:43:15 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static char	*read_buffer(int fd, char *buff, char *line)
 		l_offst += i;
 	}
 }
-#include <stdio.h>
+
 char	*get_next_line(int fd)
 {
 	static char	*buffers_list[MAX_FD_HANDLE];
@@ -102,15 +102,8 @@ char	*get_next_line(int fd)
 
 	buff = get_buff(fd, buffers_list);
 	if (!buff)
-	{
-		printf("INVALIDE BUFF: FD=%d\n", fd);
-		fflush(stdout);
 		return (NULL);
-	}
 	line = read_buffer(fd, buff, NULL);
-	printf("str:%s/\n", line);
-	printf("buf:%s/\n", buff);
-	fflush(stdout);
 	if (line == NULL || (buff && buff[0] == '\0'))
 	{
 		free(buffers_list[fd]);
