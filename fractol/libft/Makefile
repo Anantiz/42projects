@@ -6,16 +6,16 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/11/12 16:45:31 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/13 10:17:31 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifeq ($(origin NAME), undefined)
-    NAME:=libft.a
-	LIB_FT_PATH:=.
-else
-	TARGETS+=libft.a
-endif
+LIBFT_NAME:=libft.a
+LIB_FT_PATH:=.
+
+CC:=cc
+INCLUDE_PATH= ../includes
+CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH)
 
 
 LIB_FT_FILES:=ft_atoi.c \
@@ -62,7 +62,7 @@ LIB_FT_FILES:=ft_atoi.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
 	ft_uitoa.c \
-	ft_printf.c\
+	ft_printf.c \
 	ft_uitohex.c \
 	ft_ltohex.c \
 	ft_ultohex.c \
@@ -72,13 +72,10 @@ LIB_FT_FILES:=ft_atoi.c \
 LIB_FT_FILES:= $(addprefix $(LIB_FT_PATH)/,$(LIB_FT_FILES))
 LIB_FT_OBJECTS:= $(patsubst %.c,%.o,$(LIB_FT_FILES))
 
-ifeq ($(origin LIB_OBJECTS), file)
-	LIB_OBJECTS+=$(LIB_FT_OBJECTS)
-else
-all:$(NAME)
+all:$(LIBFT_NAME)
 	@echo libft all
 
-$(NAME): $(LIB_FT_OBJECTS)
+$(LIBFT_NAME): $(LIB_FT_OBJECTS)
 	@echo compiling libft
 	@$(AR) rcs $@ $^
 
@@ -86,10 +83,8 @@ clean:
 	@$(RM) $(LIB_FT_OBJECTS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(LIBFT_NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-
-endif

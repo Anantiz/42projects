@@ -6,41 +6,48 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/12 16:53:26 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/13 16:28:25 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC=cc
-CFLAGS=-Wall -Werror -Wextra
-RM=rm -rf
+CC:=cc
+INCLUDE_PATH=./includes
+CFLAGS:=-I$(INCLUDE_PATH) #-Wall -Werror -Wextra
+RM:=rm -rf
 
-NAME=fractol
+NAME:=fractol
+LIBS:=libft.a libmlx.a
 
-LIBS=libft.a
-LIB_OBJECTS=
-LIB_FT_PATH=libft
+SRC_PATH:=src
+MINILIBX_PATH:=minilibx-linux
+LIBFT_PATH:=libft
 
-TARGETS=
-
-include $(addsuffix /Makefile,$(LIB_FT_PATH))
-
-SRC_FILEs:= renderer.c \
+SRC_FILES:= renderer.c \
 	generator.c
 
-SRC_FILES:= $(addprefix src/,$(SRC_FILES))
+SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
+SRC_FILES+= main.c
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))
 
 all: $(NAME)
 
-$(LIBS): $(LIB_OBJECTS)
-	@echo Archiving $(TARGETS)
-	@$(AR) rcs $@ $^
-	@echo Archiving done
+$(LIBS):
+	@make -C $(LIBFT_PATH)/ all
+	@make -C $(LIBFT_PATH)/ clean
+	@mv $(LIBFT_PATH)/libft.a ./
+	@make -C $(MINILIBX_PATH)/ all
+	@make -C $(MINILIBX_PATH)/ clean
+	@mv $(MINILIBX_PATH)/libmlx.a ./
 
 $(NAME): $(SRC_OBJECTS) | $(LIBS)
-
+	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
+	
 clean: 
-	@$(RM) $(LIB_OBJECTS) $(SRC_OBJECTS)
+	@$(RM) $(SRC_OBJECTS)
 
 fclean: clean
-	@$(RM) $(NAME) $(TARGETS) $(LIBS)
+	@$(RM) $(NAME) $(LIBS)
+
+re: fclean all
+
+.PHONY: all clean fclean re
