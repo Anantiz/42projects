@@ -6,22 +6,25 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:48 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/13 09:58:40 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/14 12:24:09 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	generate_fractal(void (*f)(void), int width, int height, int resolution)
+void	generate_fractal(int (*f)(t_i*, t_i*), int width, int height, int res)
 {
 	return ;
 }
 
-void	julia_set()
+int	mandlebrot_set(t_i *z, t_i *c)
 {
-	return ;
+	z->i = pow(z->i, 2) + c->i;
+	z->r = pow(z->r, 2) + c->r;
+	return (0);
 }
-void	mandlebrot_set()
+
+int	julia_set(t_i *z, t_i *c)
 {
-	return ;
+	return (0);
 }
