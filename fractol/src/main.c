@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:57:51 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/13 16:12:29 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/15 16:15:30 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define DEFAULT_WINDOW_WIDTH 800
 #define DEFAULT_WINDOW_HEIGHT 450
-#define DEFAULT_RESOLUTION 0.75
+#define DEFAULT_RESOLUTION 1
 #define MAX_WIDTH 3840
 #define MAX_HEIGHT 2160
 #define MIN_SIZE 128
@@ -31,56 +31,56 @@ static int	args_help()
 	return (0);
 }
 
-static void	set_size(char **argv, int argc, int *width, int *height)
+static void	init_size(char **argv, int argc, t_param *p)
 {
 	if (argc >= 3)
 	{
-		*width = ft_atoi(argv[2]);
-		*height = ft_atoi(argv[3]);
-		if (*width < MIN_SIZE || *width > MAX_WIDTH)
-			*width = DEFAULT_WINDOW_WIDTH;
-		if (*height < MIN_SIZE || *height > MAX_HEIGHT)
-			*height = DEFAULT_WINDOW_HEIGHT;
+		p->w = ft_atoi(argv[2]);
+		p->h = ft_atoi(argv[3]);
+		if (p->w < MIN_SIZE || p->w > MAX_WIDTH)
+			p->w = DEFAULT_WINDOW_WIDTH;
+		if (p->h < MIN_SIZE || p->h > MAX_HEIGHT)
+			p->h = DEFAULT_WINDOW_HEIGHT;
 	}
 	else
 	{
-		*width = DEFAULT_WINDOW_WIDTH;
-		*height = DEFAULT_WINDOW_HEIGHT;
+		p->w = DEFAULT_WINDOW_WIDTH;
+		p->h = DEFAULT_WINDOW_HEIGHT;
 	}
 }
 
-static void	set_reso_form(char **argv, int argc, float *reso, void **f)
+static void	int_res_set(char **argv, int argc, t_param *p)
 {
 	if (argc >= 5)
 	{
-		*reso = ft_atoi(argv[4]);
-		if (*reso < 0.2 || *reso > 1.5)
-			*reso = DEFAULT_RESOLUTION;
+		p->res = ft_atoi(argv[4]);
+		if (p->res < 0.2 || p->res > 1.5)
+			p->res = DEFAULT_RESOLUTION;
 	}
 	else
-		*reso = DEFAULT_RESOLUTION;
+		p->res = DEFAULT_RESOLUTION;
 	if (argc > 3 || argc == 2)
 	{
 		if (*argv[1] == 'J' || *argv[1] == 'j')
-			*f = julia_set;
+			p->f = &julia_set;
 		else
-			*f = mandlebrot_set;
+			p->f = &mandlebrot_set;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int		width;
-	int		height;
-	float	resolution;
-	void	*fformula;
+	t_param	param;
+	int		error;
 
-	if (argc > 1 && *argv[1] == 'h')
-		return (args_help());
+	// if (argc > 1 && *argv[1] == 'h')
+	// 	return (args_help());
 	if (argc == 1)
-		args_help();
-	set_size(argv, argc, &width, &height);
-	set_reso_form(argv, argc, &resolution, fformula);
-	generate_fractal(fformula, width, height, resolution);
+		return (args_help());
+	init_size(argv, argc, &param);
+	int_res_set(argv, argc, &param);
+	error = generate_fractal(&param);
+	if (error)
+		ft_printf("ERROR, could not open window code:%d\n", error);
 	return (0);
 }
