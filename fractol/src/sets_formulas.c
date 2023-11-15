@@ -6,35 +6,38 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/15 16:22:40 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/15 17:54:08 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define MAX_ITER 32
+#define MAX_ITER 24
 #define MAX_CONVERGE ULONG_MAX
 
-#define GREEN	0x00FF1C
-#define CYAN	0x001C00
-#define BLUE	0x0000CC
-#define PURPLE	0x30046E
-#define BLACK	0x000000
+#define GREEN	0x00FF1CFF
+#define CYAN	0x001C00FF
+#define BLUE	0x0000CCFF
+#define PURPLE	0x30046EFF
+#define BLACK	0x000000FF
+#define PINK	0xFFC0CBFF
 
 static unsigned int get_color(unsigned int n)
 {
+	n = MAX_ITER - n;
+	ft_printf("N = %u\t",n);
 	if (n == 0)
 		return (BLACK);
 	else if (n < 5)
-		return (GREEN);
-	else if (n < 10)
-		return (CYAN);
-	else if (n < 15)
-		return (BLUE);
-	else if (n < 20)
 		return (PURPLE);
+	else if (n < 10)
+		return (BLUE);
+	else if (n < 15)
+		return (GREEN);
+	else if (n < 24)
+		return (CYAN);
 	else
-		return (BLACK);
+		return (PINK);
 }
 
 unsigned int	mandlebrot_set(t_i *c)
