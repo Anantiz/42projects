@@ -6,11 +6,12 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:57:51 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 14:47:21 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 18:10:54 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdio.h>
 
 #define DEFAULT_WINDOW_WIDTH 800
 #define DEFAULT_WINDOW_HEIGHT 450
@@ -43,11 +44,6 @@ static void	init_size(char **argv, int argc, t_param *p)
 	}
 }
 
-static int	ft_atoz(t_i *z, char *str)
-{
-	
-}
-
 static void	int_res_set(char **argv, int argc, t_param *p)
 {
 	int	error;
@@ -63,7 +59,8 @@ static void	int_res_set(char **argv, int argc, t_param *p)
 		else if (argc == 3)
 			error = ft_atoz(&p->c ,argv[2]);
 		if (error)
-			p->set = error_invalid_constant(argv, argc, error); // If Juilia set was given check if constant is present
+			p->set = error_invalid_constant(error); // If Juilia set was given check if constant is present
+		printf("r=%lf  i=%lf\n",p->c.r, p->c.i);
 	}
 	else
 		p->set = 0;
@@ -83,5 +80,6 @@ int	main(int argc, char **argv)
 	error = generate_fractal(&param);
 	if (error)
 		ft_printf("ERROR, could not open window error:%d\n", error);
+	//free_params(&param);
 	return (0);
 }

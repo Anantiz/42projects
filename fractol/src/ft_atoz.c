@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_atoz.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 16:21:13 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 18:12:06 by aurban           ###   ########.fr       */
+/*   Created: 2023/11/16 17:52:55 by aurban            #+#    #+#             */
+/*   Updated: 2023/11/16 18:18:34 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_atoz(t_i *z, char *str)
 {
-	char	c;
-
-	if (n < 0 && n > -10)
-		write(fd, "-", 1);
-	if (n < 0)
-		c = ((10 - (n % 10)) % 10) + '0';
-	else
-		c = (n % 10) + '0';
-	n = n / 10;
-	if (n != 0)
-		ft_putnbr_fd(n, fd);
-	write(fd, &c, 1);
+	if (z == NULL)
+		return (-1);
+	z->r = ft_atodb(str);
+	while (*str && (*str != 'i' || *str != 'I'))
+		str++;
+	str++;
+	z->i = ft_atodb(str);
+	return (0);
 }

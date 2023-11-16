@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 14:35:34 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 18:09:39 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,19 @@ unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z s
 	return (get_color(n));
 }
 
-unsigned int	julia_set(t_i z, t_i *c) // C is a constant given as input, Z starts with the pixel
+unsigned int	julia_set(t_i *z, t_i *c) // C is a constant given as input, Z starts with the pixel
 {
 	unsigned int	n;
-	t_i				z;
 	double			zr;
 
 	n = MAX_ITER;
 	while (n > 0)
 	{
-		zr = z.r;
-		z.r = (z.r * z.i) - (z.i * z.r) + c->r;
-		z.i = (zr * z.i) + (z.i * zr) + c->i;
+		zr = z->r;
+		z->r = (z->r * z->i) - (z->i * z->r) + c->r;
+		z->i = (zr * z->i) + (z->i * zr) + c->i;
 		n--;
-		if ((z.r * z.r + z.i * z.i) > MAX_CONVERGE)
+		if ((z->r * z->r + z->i * z->i) > MAX_CONVERGE)
 			break ;
 	}
 	return (get_color(n));

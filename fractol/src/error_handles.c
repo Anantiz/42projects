@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 14:50:52 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 18:10:27 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	args_help()
 	return (0);
 }
 
-int	error_invalid_set(char *set)
+int	error_invalid_set(char set)
 {
 	ft_printf("Invalid set argument, no valid set for '%c' or lacks"
 	" arguments\n", set);
 	return (0);
 }
 
-int	error_invalid_constant(char **argv, int argc, int error)
+int	error_invalid_constant(int error)
 {
 	if (error == -1)
 	{

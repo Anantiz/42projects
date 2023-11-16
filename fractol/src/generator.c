@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:04:29 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 14:31:33 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 17:58:10 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ int	generate_fractal(t_param *p)
 	ft_init_image(p);
 	if (mlx_image_to_window(p->mlx, p->img, 0, 0) < 0) // Enable display
 		return (-3);
+	return (0);
 }

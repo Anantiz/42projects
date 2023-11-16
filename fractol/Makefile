@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/16 14:29:25 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/16 18:04:30 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC_FILES:= main.c \
 	renderer.c \
 	generator.c \
 	sets_formulas.c \
-	error_handles.c
+	error_handles.c \
+	ft_atoz.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))

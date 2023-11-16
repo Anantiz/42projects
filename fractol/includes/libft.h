@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:44:18 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/12 16:13:56 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 18:11:41 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /* CONVERSIONS */
-int		ft_atoi(const char *nptr);
-char	*ft_itoa(int n);
-char	*ft_uitoa(unsigned int n);
-char	*ft_uitohex(unsigned int n);
-char	*ft_uitohex_up(unsigned int n);
-char	*ft_ltohex(long n);
-char	*ft_ltohex_up(long n);
-char	*ft_ultohex(unsigned long n);
-char	*ft_ultohex_up(unsigned long n);
+int			ft_atoi(const char *nptr);
+double		ft_atodb(char *str);
+long long	ft_atoll(char *nptr);
+char		*ft_itoa(int n);
+char		*ft_uitoa(unsigned int n);
+char		*ft_lltoa(long long n);
+char		*ft_uitohex(unsigned int n);
+char		*ft_uitohex_up(unsigned int n);
+char		*ft_ltohex(long n);
+char		*ft_ltohex_up(long n);
+char		*ft_ultohex(unsigned long n);
+char		*ft_ultohex_up(unsigned long n);
 
 
 /* MEMORY */

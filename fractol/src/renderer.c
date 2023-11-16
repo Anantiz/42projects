@@ -6,13 +6,15 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:52:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 14:31:55 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 18:06:41 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_init_image(t_param p)
+int	ft_init_image(t_param *p)
 {
-	
+	if (p)
+		return (1);
+	return (0);
 }
