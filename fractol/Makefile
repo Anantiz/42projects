@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/15 15:41:39 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/16 14:29:25 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LIBMLX_PATH	:= ./MLX42
 SRC_FILES:= main.c \
 	renderer.c \
 	generator.c \
-	sets_formulas.c
+	sets_formulas.c \
+	error_handles.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))

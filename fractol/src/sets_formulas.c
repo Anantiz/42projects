@@ -6,14 +6,14 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/15 17:54:08 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/16 14:35:34 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define MAX_ITER 24
-#define MAX_CONVERGE ULONG_MAX
+#define MAX_ITER 16
+#define MAX_CONVERGE 2
 
 #define GREEN	0x00FF1CFF
 #define CYAN	0x001C00FF
@@ -40,44 +40,42 @@ static unsigned int get_color(unsigned int n)
 		return (PINK);
 }
 
-unsigned int	mandlebrot_set(t_i *c)
+unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z starts at 0
 {
 	unsigned int	n;
 	t_i				z;
+	double			zr;
 
 	z.r = c->r;
 	z.i = c->i;
 	n = MAX_ITER;
-	while (n > 1)
+	while (n > 0)
 	{
+		zr = z.r;
 		z.r = (z.r * z.i) - (z.i * z.r) + c->r;
-		z.i = (z.r * z.i) + (z.i * z.r) + c->i;
+		z.i = (zr * z.i) + (z.i * zr) + c->i;
 		n--;
 		if ((z.r * z.r + z.i * z.i) > MAX_CONVERGE)
 			break ;
-		if (z.r == c->r && z.i == c->i)
-			return (0);
 	}
 	return (get_color(n));
 }
 
-unsigned int	julia_set(t_i *c)
+unsigned int	julia_set(t_i z, t_i *c) // C is a constant given as input, Z starts with the pixel
 {
 	unsigned int	n;
 	t_i				z;
+	double			zr;
 
-	z.r = c->r;
-	z.i = c->i;
 	n = MAX_ITER;
-	while (n > 1)
+	while (n > 0)
 	{
+		zr = z.r;
 		z.r = (z.r * z.i) - (z.i * z.r) + c->r;
-		z.i = (z.r * z.i) + (z.i * z.r) + c->i;
+		z.i = (zr * z.i) + (z.i * zr) + c->i;
 		n--;
 		if ((z.r * z.r + z.i * z.i) > MAX_CONVERGE)
 			break ;
-		if (z.r == c->r && z.i == c->i)
-			return (0);
 	}
 	return (get_color(n));
 }
