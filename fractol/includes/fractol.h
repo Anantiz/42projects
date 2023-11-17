@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 18:10:19 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 11:58:14 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@
 
 typedef struct s_idouble
 {
-	double	i;
-	double	r;
+	long double	i;
+	long double	r;
 }t_i;
 
 typedef struct s_param
 {
 	unsigned int	w;
 	unsigned int	h;
+	long double		zoom;
+	long double		screen_resolution;
+	t_i		 		img_origin;
 	t_i				c;
 	char			set;
 	mlx_t			*mlx;

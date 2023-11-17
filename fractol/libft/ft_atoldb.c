@@ -6,38 +6,39 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:25:28 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 18:14:54 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 10:49:36 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static double	get_decimal(char *str)
+static long double	get_decimal(char *str)
 {
-	double	result;
-	int		i;
+	long double	n;
+	long double	i;
 
-	result = 0.0;
+	n = 0.0;
 	i = 10;
-	while(ft_isdigit((int)(*str)))
+	while (ft_isdigit((int)(*str)))
 	{
-		result += (1 / i) * ((*str) - '0');
+		n += (1 / i) * ((*str) - '0');
 		i *= 10;
+		str++;
 	}
-	return (result);
+	return (n);
 }
 
-double	ft_atodb(char *str)
+long double	ft_atoldb(char *str)
 {
-	double		result;	
+	long double		n;	
 	long long	left;
 
-	result = 0.0;
+	n = 0.0;
 	left = ft_atoll(str);
-	while(*str != '.' && *str != ',' && *str)
+	n += (long double)left;
+	while (ft_isdigit((int)(*str)) && !(*str == '.' || *str == ','))
 		str++;
-	result += left;
-	if (*str++)
-		result += get_decimal(str);
-	return (result);
+	if (*str && (*str == '.' || *str == ','))
+		n += get_decimal((str + 1));
+	return (n);
 }

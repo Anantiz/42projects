@@ -6,14 +6,14 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/20 06:06:39 by aurban            #+#    #+#              #
-#    Updated: 2023/11/16 17:54:41 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/17 10:49:53 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT_NAME:=libft.a
 LIB_FT_PATH:=.
 
-CC:=cc
+CC:=gcc
 INCLUDE_PATH= ../includes
 CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH)
 
@@ -69,7 +69,7 @@ LIB_FT_FILES:=ft_atoi.c \
 	ft_send_to_buffer.c \
 	ft_arg_to_buffer.c \
 	ft_lltoa.c \
-	ft_atodb.c
+	ft_atoldb.c
 
 LIB_FT_FILES:= $(addprefix $(LIB_FT_PATH)/,$(LIB_FT_FILES))
 LIB_FT_OBJECTS:= $(patsubst %.c,%.o,$(LIB_FT_FILES))

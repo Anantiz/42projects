@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/16 18:04:30 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/17 10:15:33 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CFLAGS:=-Wall -Werror -Wextra -I$(INCLUDE_PATH) -ldl -lglfw -pthread -lm
 RM:=rm -rf
 
 NAME:=fractol
-LIBFT= libft.a 
+LIBFT= libft.a
 LIBMLX = libmlx42.a
-LIBS:= $(LIBFT) $(LIBMLX)
+LIBS:=$(LIBFT) $(LIBMLX)
 
 SRC_PATH:=src
 LIBFT_PATH:=./libft

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/16 18:09:39 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 10:50:31 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static unsigned int get_color(unsigned int n)
 unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z starts at 0
 {
 	unsigned int	n;
+	long double		zr;
 	t_i				z;
-	double			zr;
 
 	z.r = c->r;
 	z.i = c->i;
@@ -64,7 +64,7 @@ unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z s
 unsigned int	julia_set(t_i *z, t_i *c) // C is a constant given as input, Z starts with the pixel
 {
 	unsigned int	n;
-	double			zr;
+	long double		zr;
 
 	n = MAX_ITER;
 	while (n > 0)
