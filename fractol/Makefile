@@ -6,7 +6,7 @@
 #    By: aurban <aurban@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 16:43:24 by aurban            #+#    #+#              #
-#    Updated: 2023/11/17 10:15:33 by aurban           ###   ########.fr        #
+#    Updated: 2023/11/17 15:26:28 by aurban           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_FILES:= main.c \
 	generator.c \
 	sets_formulas.c \
 	error_handles.c \
-	ft_atoz.c
+	ft_atoz.c \
+	init_param.c
 
 SRC_FILES:= $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 SRC_OBJECTS:= $(patsubst %.c,%.o,$(SRC_FILES))
@@ -52,7 +53,7 @@ $(LIBFT):
 DO_LIBS: libft libmlx
 
 $(NAME): $(SRC_OBJECTS) | DO_LIBS
-	$(CC) $^ $(LIBS) $(CFLAGS) -o $@
+	@$(CC) $^ $(LIBS) $(CFLAGS) -o $@
 	
 clean: 
 	@$(RM) $(SRC_OBJECTS)

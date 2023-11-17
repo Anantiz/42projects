@@ -6,13 +6,13 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:15:57 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/17 10:50:31 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:03:22 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define MAX_ITER 16
+#define MAX_ITER 64
 #define MAX_CONVERGE 2
 
 #define GREEN	0x00FF1CFF
@@ -22,29 +22,39 @@
 #define BLACK	0x000000FF
 #define PINK	0xFFC0CBFF
 
+
+/*
+	Blue shift for faster infinity
+	Red  shift for slower infinity
+*/
 static unsigned int get_color(unsigned int n)
 {
+	unsigned int	color;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
+	double			normalized_n;
+
 	n = MAX_ITER - n;
-	ft_printf("N = %u\t",n);
-	if (n == 0)
+	if (n == MAX_ITER)
+	{
+		ft_printf("n=%u\tcolor=%X\n",n, BLACK);
 		return (BLACK);
-	else if (n < 5)
-		return (PURPLE);
-	else if (n < 10)
-		return (BLUE);
-	else if (n < 15)
-		return (GREEN);
-	else if (n < 24)
-		return (CYAN);
-	else
-		return (PINK);
+	}
+	normalized_n = n / MAX_ITER;
+	red = (unsigned int)(normalized_n * 180);
+	green = (unsigned int)(normalized_n * 67);
+	blue = (unsigned int)(normalized_n * 200);
+	color = (red << 24) + (green << 16) + (blue << 8) + 255;
+	ft_printf("n=%u\tcolor=%u\n",n, color);
+	return (color);
 }
 
 unsigned int	mandlebrot_set(t_i *c) // C is a constant based on pixel value, Z starts at 0
 {
-	unsigned int	n;
-	long double		zr;
-	t_i				z;
+	int			n;
+	long double	zr;
+	t_i			z;
 
 	z.r = c->r;
 	z.i = c->i;

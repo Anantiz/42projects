@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:24:23 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/17 12:08:04 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 15:29:35 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	args_help()
 {
-	ft_printf("Parameters:\n\t"
-	"\n\t(required)set  =  Fractal Set:  'M'= Mandlebrot 'J'= Julia"
-	"\n\t(depends )const=  Fractal Const: xxixx (x are digits)"
-	"\n\t(optional)size =  [small, medium, large] impacts rendering speed\n");
+	ft_printf("Parameters:"
+	"\n\t(required)set=\"your set\"  Fractal Set:  'M'= Mandlebrot 'J'= Julia"
+	"\n\t(depends )const=\"set const\"  Fractal Const: xxixx (x are digits)"
+	"\n\t(optional)size=\"size\"  [small, medium, large] impacts rendering speed\n");
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:59:52 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/17 11:58:14 by aurban           ###   ########.fr       */
+/*   Updated: 2023/11/17 14:55:06 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ typedef struct s_param
 	mlx_image_t		*img;
 }t_param;
 
-int	generate_fractal(t_param *p);
 
+int	generate_fractal(t_param *p);
 int	ft_init_image(t_param *p);
 
 unsigned int	julia_set(t_i *z,t_i *c);
 unsigned int	mandlebrot_set(t_i *c);
 
+int	init_param(char **argv, int argc, t_param *p);
 int	args_help();
 int	error_invalid_set(char set);
 int	error_invalid_constant(int error);
