@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoz.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 17:30:59 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 15:03:44 by aurban           ###   ########.fr       */
+/*   Created: 2023/11/16 17:52:55 by aurban            #+#    #+#             */
+/*   Updated: 2023/11/19 12:18:43 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_atoz(t_i *z, char *str)
 {
-	int		result;
-	int		sign;
-
-	result = 0;
-	sign = 1;
-	while (*nptr == 32 || (*nptr >= 9 && *nptr <= 13))
-		nptr++;
-	if (*nptr == '-')
-	{
-		sign = -1;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr && *nptr >= 48 && *nptr <= 57)
-	{
-		result *= 10;
-		result += sign * (*nptr++ - 48);
-	}
-	return (result);
+	if (z == NULL)
+		return (69);
+	if (!str)
+		return (-1);
+	z->r = ft_atoldb(str);
+	if (*str == '-' || *str == '+')
+		str++;
+	while (ft_isdigit(*str) || *str == '.' || *str == ',')
+		str++;
+	if (*str++ != 'i')
+		return (-2);
+	z->i = ft_atoldb(str);
+	return (0);
 }

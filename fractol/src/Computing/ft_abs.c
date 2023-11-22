@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 17:30:59 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/18 15:03:44 by aurban           ###   ########.fr       */
+/*   Created: 2023/11/22 00:02:21 by aurban            #+#    #+#             */
+/*   Updated: 2023/11/22 00:03:24 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-int	ft_atoi(const char *nptr)
+long double	ft_abs(long double n)
 {
-	int		result;
-	int		sign;
-
-	result = 0;
-	sign = 1;
-	while (*nptr == 32 || (*nptr >= 9 && *nptr <= 13))
-		nptr++;
-	if (*nptr == '-')
-	{
-		sign = -1;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr && *nptr >= 48 && *nptr <= 57)
-	{
-		result *= 10;
-		result += sign * (*nptr++ - 48);
-	}
-	return (result);
+	if (n > 0)
+		return (n);
+	else
+		return (-n);
 }
