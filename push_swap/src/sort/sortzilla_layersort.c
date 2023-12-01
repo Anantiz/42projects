@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:26:25 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/30 19:42:52 by aurban           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:05:35 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ static int	do_action_map2(t_data *d, size_t *act_map, size_t i, size_t count)
 				rotate_a(d->a);
 		}
 		else if (count != 1 && act_map[i] == count)
-			swap_a(d->a);
+		{
+			if (d->b->head && d->b->head->next && d->b->head->index \
+				< d->b->head->next->index)
+				swap_swap(d->a, d->b);
+			else
+				swap_a(d->a);
+		}
 		i++;
 	}
 	return (0);

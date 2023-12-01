@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:21:42 by aurban            #+#    #+#             */
-/*   Updated: 2023/12/01 12:59:04 by aurban           ###   ########.fr       */
+/*   Updated: 2023/12/01 17:04:56 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	get_nimi_cost(t_data *d, size_t nimi, t_gl *gl, t_llint *logs)
 {
-	// int rotated = 0;
-	
 	(*gl->cost) += move_node_logs(d, nimi, logs);
 	if (nimi == gl->next_i)
 	{
@@ -26,14 +24,9 @@ void	get_nimi_cost(t_data *d, size_t nimi, t_gl *gl, t_llint *logs)
 	else if (nimi < gl->next_i - 2)
 	{
 		rotate_a_log(d->a, logs);
-		// rotated = 1;
-		(*gl->cost)++;
+		(*gl->cost) += 2;
 	}
 	get_nimi_cost(d, nimi + 1, gl, logs);
-	// if (rotated) //IS a CHANGE
-	// {
-	// 	rev_rotate_a_log(d->a, logs);
-	// }
 }
 
 /* OK */
@@ -70,7 +63,6 @@ static long	cost_to_move_nimi(t_data *d, size_t nimi)
 {
 	t_llint	*logs;
 	size_t	cost;
-	int		mv_count;
 	t_gl	gl;
 
 	if (nimi == (size_t)lydt_lowest(d->lydt))
@@ -79,17 +71,12 @@ static long	cost_to_move_nimi(t_data *d, size_t nimi)
 		return (ft_abs_ll(how_expensive_are_you(d->a, d->b, nimi)));
 	logs = ft_llint_new();
 	gl.next_i = d->a->head->index - 1;
-	// cost = 0;
+	cost = 0;
 	gl.cost = &cost;
-	// HERE COST IS NOT INIT and it don't work, init changes nothing,
-	// In other one the result was better for cost not being init
 	get_nimi_cost(d, nimi, &gl, logs);
 	undo_logs(d, logs);
 	ft_llint_del_list(logs);
-	mv_count = (d->a->head->index - 1 - nimi);
-	if (mv_count == 0)
-		mv_count = 1;
-	return (cost / (mv_count));
+	return (cost - ((d->a->head->index - nimi + 1) * 2));
 }
 
 static void	fill_action_map(t_data *d, size_t *action_map, size_t cheapest_i)

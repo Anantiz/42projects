@@ -6,7 +6,7 @@
 /*   By: aurban <aurban@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:32:30 by aurban            #+#    #+#             */
-/*   Updated: 2023/11/30 20:16:17 by aurban           ###   ########.fr       */
+/*   Updated: 2023/12/01 15:54:10 by aurban           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ long	how_expensive_are_you(t_llint *a, t_llint *b, long index)
 	if (position < (long)(b->size / 2))
 		cost = position;
 	else
-		cost = -(b->size - position + 2);
+		cost = -(b->size - position + 1);
 	return (cost);
 }
